@@ -14,13 +14,34 @@ public class Lexer {
          while(i<input.length()){
              var c=input.charAt(i);
              if(c==' ') i++;
-             else if(c=='+') tokens.add(new Token(TokenType.PLUS,"+"));
-             else if(c=='-') tokens.add(new Token(TokenType.MINUS,"-"));
-             else if(c=='(') tokens.add(new Token(TokenType.LPAREN,"("));
-             else if(c==')') tokens.add(new Token(TokenType.RPAREN,")"));
-             else if(c=='*') tokens.add(new Token(TokenType.STAR,"*"));
-             else if(c=='/') tokens.add(new Token(TokenType.SLASH,"/"));
-             else if(c=='\n') tokens.add(new Token(TokenType.INDENT,"\n"));
+             else if(c=='+') {
+                 tokens.add(new Token(TokenType.PLUS, "+"));
+                 i++;
+             }
+             else if(c=='-') {
+                 tokens.add(new Token(TokenType.MINUS, "-"));
+                 i++;
+             }
+             else if(c=='(') {
+                 tokens.add(new Token(TokenType.LPAREN, "("));
+                 i++;
+             }
+             else if(c==')') {
+                 tokens.add(new Token(TokenType.RPAREN, ")")) ;
+                 i++;
+             }
+             else if(c=='*') {
+                 tokens.add(new Token(TokenType.STAR, "*"));
+                 i++;
+             }
+             else if(c=='/') {
+                 tokens.add(new Token(TokenType.SLASH, "/"));
+                 i++;
+             }
+             else if(c=='\n') {
+                 tokens.add(new Token(TokenType.INDENT, "\n"));
+                 i++;
+             }
              else if(Character.isDigit(c) || c=='.') {
                  int start = i;
                  while (i < input.length() && (Character.isDigit(input.charAt(i)) || input.charAt(i) == '.')) {
@@ -33,7 +54,7 @@ public class Lexer {
                  tokens.add(new Token(TokenType.NUMBER,input.substring(start,i)));
              }
              else throw new RuntimeException("Invalid character: "+c);
-             i++;
+
          }
 
         return tokens;
